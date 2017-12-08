@@ -1,0 +1,75 @@
+Désigner un commit
+
+	-Identifiant : ex git commit show 73ex9856....
+	-Nom de branche : Dernier commit de la branche ex : git show experimental
+	-HEAD : dernier commit de la branche courante : git show HEAD
+	-commit ^ :avant dernier commit = git show HEAD^
+			-> Grand parent : git show HEAD^^
+			-> Grand grand grand parent : git show HEAD^^^^
+			- On peut utiliser une autre notation : git show ~4 ( == git show HEAD^^^^ )
+
+	Si on à plusieurs parents ( ex merge)
+		- commit ^1 = 1er parent
+		- commit ^2 = 2eme parent
+
+Etiqueter un commit
+
+	- git tag v2.5 328abc
+	- git diff v2.4 HEAD
+	- git log v2.5 v2.6
+	- git branch stable v2.4
+	- git show v2.5:FILE
+	- git grep "hello"
+
+Voir qui à modifier la ligne
+
+	- git blame <fichier>
+
+Annuler un commit
+	
+	- git revert <commit> => enregistre un nouveau commit sans les modifications de l'ancien
+
+Retrouver origine d'un bug
+
+	-git bisect start
+	-git bisect bad //* le dernier commit à le bug
+	-git bisect good v1.9 //* le commit v1.9 n'a pas le bug
+
+git va check toute les version et repondre :
+	-git bisect good //* bug pas presnet
+	-git bisect bad //* (le bug est présent)
+	-git bisect skip 
+
+pour revenir dans un etat normal
+
+	-git bisec reset
+
+check avant d'ajouter un fichier
+
+git add -p FICHIER
+
+réponse : 
+y (yes), n (no), q(quit), a(ajout reste du fichier courant), d(ignore), s(split, utile quand c'est trop long), e(edit, ne pas utiliser)
+
+rajouter modification au dernier commit ou réediter dernier message de commit
+
+git commit --amend
+
+Supprimer des commit
+
+git reset --soft <commit> //* Rénitialise le dépot
+git reset --mixed <commit> //* par defaut, Rénitialise dépot et index
+git reset --hard <commit> //* Rénitialise dépot, index et fichier
+
+exemples :
+
+git reset --soft HEAD^ : supprime le dernier commit
+git reset --hard HEAD~3 : supprime les 3 derniers commits + les modifs
+
+Eviter un merge lors d'un git pull
+
+git pull --rebase
+
+Modifier des commits
+
+Ajouter, Editer, Supprimer, Modifier le message, Changer l'ordre, Fusionner, etc
